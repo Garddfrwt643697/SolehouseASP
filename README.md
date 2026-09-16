@@ -2,22 +2,28 @@
 
 Магазин кроссовок + портфолио на ASP.NET Core.
 
-## 🛠️ Стек
-- **ASP.NET Core 10** (Razor Pages + Controllers)
-- **C# REST API** (`/api/products`)
-- **Tailwind CSS** (локально)
-- **Vanilla JS** (корзина, избранное, фильтры)
+---
 
-## 📦 Что внутри
-- Портфолио с 6 демо-проектами
-- Интернет-магазин (120+ товаров)
-- C# API для товаров
-- JSON fallback (работает без бэкенда)
-- Адаптивная вёрстка
+## 🚀 Быстрый старт
 
-## ⚙️ Локальный запуск
+### Что нужно
+- **.NET 10 SDK** — [скачать](https://dotnet.microsoft.com/download/dotnet/10.0)
+- Проверка: `dotnet --version` в терминале → должно быть `10.x.x`
 
+### Запуск
 ```bash
 git clone https://github.com/Garddfrwt643697/SolehouseASP.git
 cd SolehouseASP/MyPortfolio
 dotnet run
+markdown
+
+Если без Git
+Нажми Code → Download ZIP на странице репозитория
+
+Распакуй архив
+
+Открой папку MyPortfolio в терминале
+
+Введи dotnet run  или нажми F5
+
+Открой http://localhost:5240

@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — SOLEHOUSE</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+        }
+
+        .mega-parent {
+            position: relative;
+        }
+
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 24px;
+            min-width: 480px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.2s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .mega-parent:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            }
+
+        .product-placeholder {
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .autumn-banner {
+            background: linear-gradient(135deg, #7c2d12, #c2410c, #ea580c, #f59e0b);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .leaf {
+            position: fixed;
+            font-size: 24px;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Осенний баннер -->
+    <div class="autumn-banner text-white text-center py-4 text-sm font-bold">
+        🍂 ОСЕННЯЯ КОЛЛЕКЦИЯ 2026 · СКИДКИ ДО 50% 🍁
+    </div>
+
+    <header class="border-b border-gray-200 sticky top-0 bg-white z-50">
+        <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center gap-6">
+            <a href="index.html" class="text-3xl font-black tracking-tight">SOLE<span class="text-amber-500">HOUSE</span></a>
+
+            <!-- Меню -->
+            <nav class="hidden lg:flex gap-6 text-sm font-semibold text-gray-700 items-center">
+                <div class="mega-parent">
+                    <a href="catalog.html?cat=men" class="hover:text-amber-500 transition py-2 block">Мужчинам</a>
+                    <div class="mega-menu">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Обувь</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=men&type=sneakers" class="hover:text-amber-500">Кроссовки</a></li>
+                                    <li><a href="catalog.html?cat=men&type=boots" class="hover:text-amber-500">Ботинки</a></li>
+                                    <li><a href="catalog.html?cat=men&type=sandal" class="hover:text-amber-500">Сандалии</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Бренды</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=men&brand=Nike" class="hover:text-amber-500">Nike</a></li>
+                                    <li><a href="catalog.html?cat=men&brand=Adidas" class="hover:text-amber-500">Adidas</a></li>
+                                    <li><a href="catalog.html?cat=men&brand=New Balance" class="hover:text-amber-500">New Balance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Акции</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?sale=1" class="hover:text-red-500 font-bold">SALE до -50%</a></li>
+                                    <li><a href="catalog.html?sort=popular" class="hover:text-amber-500">Хиты</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mega-parent">
+                    <a href="catalog.html?cat=women" class="hover:text-amber-500 transition py-2 block">Женщинам</a>
+                    <div class="mega-menu">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Обувь</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=women&type=sneakers" class="hover:text-amber-500">Кроссовки</a></li>
+                                    <li><a href="catalog.html?cat=women&type=boots" class="hover:text-amber-500">Ботинки</a></li>
+                                    <li><a href="catalog.html?cat=women&type=sandal" class="hover:text-amber-500">Сандалии</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Бренды</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=women&brand=Nike" class="hover:text-amber-500">Nike</a></li>
+                                    <li><a href="catalog.html?cat=women&brand=Adidas" class="hover:text-amber-500">Adidas</a></li>
+                                    <li><a href="catalog.html?cat=women&brand=Birkenstock" class="hover:text-amber-500">Birkenstock</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Акции</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?sale=1" class="hover:text-red-500 font-bold">SALE до -50%</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mega-parent">
+                    <a href="catalog.html?cat=kids" class="hover:text-amber-500 transition py-2 block">Детям</a>
+                    <div class="mega-menu">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Обувь</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=kids&type=sneakers" class="hover:text-amber-500">Кроссовки</a></li>
+                                    <li><a href="catalog.html?cat=kids&type=sandal" class="hover:text-amber-500">Сандалии</a></li>
+                                    <li><a href="catalog.html?cat=kids&type=boots" class="hover:text-amber-500">Ботинки</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Бренды</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=kids&brand=Nike" class="hover:text-amber-500">Nike</a></li>
+                                    <li><a href="catalog.html?cat=kids&brand=Adidas" class="hover:text-amber-500">Adidas</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="catalog.html?sale=1" class="hover:text-red-500 transition text-red-500 font-bold">SALE</a>
+            </nav>
+
+            <!-- Поиск -->
+            <div class="hidden md:block flex-1 max-w-xs">
+                <input type="text" id="searchInput" placeholder="Поиск..."
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-full text-sm outline-none focus:border-amber-500">
+            </div>
+
+            <div class="flex items-center gap-5">
+                <button id="geoDisplay" onclick="showGeoModal(); localStorage.removeItem('geo');" class="text-xs text-gray-500 hover:text-amber-500 transition hidden md:block">📍 Выбрать город</button>
+                <a href="favorites.html" class="text-lg font-semibold text-gray-700 hover:text-amber-500 transition relative">
+                    ♡
+                    <span id="favCount" class="absolute -top-2 -right-3 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+                <a href="cart.html" class="text-lg font-semibold text-gray-700 hover:text-amber-500 transition relative">
+                    🛒
+                    <span id="cartCount" class="absolute -top-2 -right-3 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+                <div id="authButton"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-gray-500">
+        <a href="index.html" class="hover:text-amber-500">Главная</a> /
+        <span id="breadcrumb">Каталог</span>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 pb-20 grid md:grid-cols-4 gap-8">
+
+        <aside class="md:col-span-1">
+            <h3 class="font-black text-lg mb-6">ФИЛЬТРЫ</h3>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Категория</h4>
+                <div class="space-y-2 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="all" checked> Все</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="men"> Мужские</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="women"> Женские</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="kids"> Дети</label>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Тип</h4>
+                <div class="space-y-2 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="type" value="all" checked> Все</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="type" value="sneakers"> Кроссовки</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="type" value="boots"> Ботинки</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="type" value="sandal"> Сандалии</label>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Сезон</h4>
+                <div class="space-y-2 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="season" value="all" checked> Все</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="season" value="autumn"> 🍂 Осень</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="season" value="winter"> ❄️ Зима</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="season" value="spring"> 🌸 Весна</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="season" value="summer"> ☀️ Лето</label>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Бренд</h4>
+                <div class="space-y-2 text-sm" id="brandFilters"></div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Цена</h4>
+                <div class="flex gap-2">
+                    <input type="number" id="priceMin" placeholder="от" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <input type="number" id="priceMax" placeholder="до" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                </div>
+                <button onclick="applyFilters()" class="mt-2 w-full py-2 bg-gray-900 text-white font-bold rounded-lg text-sm hover:bg-amber-500 transition">Применить</button>
+            </div>
+
+            <div class="mb-6">
+                <label class="flex items-center gap-2 text-sm cursor-pointer">
+                    <input type="checkbox" id="onlySale"> Только со скидкой
+                </label>
+            </div>
+
+            <button onclick="resetFilters()" class="w-full py-2 border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50 transition">Сбросить всё</button>
+        </aside>
+
+        <main class="md:col-span-3">
+            <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+                <div>
+                    <p class="text-sm text-gray-500"><span id="count">0</span> товаров</p>
+                    <p id="searchInfo" class="text-sm text-gray-900 font-bold mt-1 hidden"></p>
+                </div>
+                <select id="sort" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold outline-none cursor-pointer">
+                    <option value="default">По умолчанию</option>
+                    <option value="price-asc">Цена: по возрастанию</option>
+                    <option value="price-desc">Цена: по убыванию</option>
+                    <option value="rating">По рейтингу</option>
+                    <option value="popular">По популярности</option>
+                </select>
+            </div>
+
+            <div id="grid" class="grid grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <p id="empty" class="text-center text-gray-500 py-20 hidden">Ничего не найдено</p>
+
+            <div id="pagination" class="flex justify-center gap-2 mt-10"></div>
+        </main>
+
+    </div>
+    <!-- FAQ -->
+    <section class="py-24 px-4 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black mb-3 text-center">ЧАСТЫЕ ВОПРОСЫ</h2>
+            <p class="text-gray-500 text-center mb-12">Всё, что нужно знать о заказе, доставке и возврате</p>
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl border border-gray-200">
+                    <button class="faq-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center hover:text-amber-500 transition">
+                        Как сделать заказ?
+                        <span class="text-amber-500 text-2xl">+</span>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-gray-600 pb-6">Выберите товар, добавьте в корзину, оформите заказ. Мы позвоним для подтверждения.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200">
+                    <button class="faq-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center hover:text-amber-500 transition">
+                        Какие способы доставки?
+                        <span class="text-amber-500 text-2xl">+</span>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-gray-600 pb-6">Курьером по Москве — на следующий день. По России — СДЭК или Почта, от 2 дней.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200">
+                    <button class="faq-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center hover:text-amber-500 transition">
+                        Можно ли примерить перед покупкой?
+                        <span class="text-amber-500 text-2xl">+</span>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-gray-600 pb-6">Да! Курьер подождёт, пока вы примерите. Оплачиваете только то, что подошло.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200">
+                    <button class="faq-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center hover:text-amber-500 transition">
+                        Как вернуть товар?
+                        <span class="text-amber-500 text-2xl">+</span>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-gray-600 pb-6">Возврат в течение 30 дней. Товар должен быть не ношенным, с бирками. Вернём деньги за 3-5 дней.</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200">
+                    <button class="faq-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center hover:text-amber-500 transition">
+                        Оригинальная ли обувь?
+                        <span class="text-amber-500 text-2xl">+</span>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="text-gray-600 pb-6">Да, 100% оригинал. Работаем только с официальными поставщиками. Гарантия качества.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/portfolio/shop/fallback/js/auth.js"></script>
+    <script src="/portfolio/shop/fallback/js/shop.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentCat = urlParams.get('cat') || 'all';
+        let currentType = urlParams.get('type') || 'all';
+        let currentSeason = urlParams.get('season') || 'all';
+        let currentBrands = [];
+        let currentPriceMin = 0;
+        let currentPriceMax = Infinity;
+        let currentSort = urlParams.get('sort') || 'default';
+        let onlySale = urlParams.get('sale') === '1';
+        let currentSearch = urlParams.get('search') || '';
+        let currentBrand = urlParams.get('brand') || null;
+        let currentPage = 1;
+        const perPage = 12;
+
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                window.location.href = 'catalog.html?search=' + encodeURIComponent(e.target.value);
+            }
+        });
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = '0px');
+                document.querySelectorAll('.faq-btn span').forEach(s => s.textContent = '+');
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    btn.querySelector('span').textContent = '−';
+                }
+            });
+        });
+
+        (async () => {
+            await loadProducts();
+
+            // Предустановка категории
+            if (currentCat !== 'all') {
+                const el = document.querySelector(`input[name="cat"][value="${currentCat}"]`);
+                if (el) el.checked = true;
+            }
+            if (currentType !== 'all') {
+                const el = document.querySelector(`input[name="type"][value="${currentType}"]`);
+                if (el) el.checked = true;
+            }
+            if (currentSeason !== 'all') {
+                const el = document.querySelector(`input[name="season"][value="${currentSeason}"]`);
+                if (el) el.checked = true;
+            }
+            if (onlySale) document.getElementById('onlySale').checked = true;
+
+            // Хлебные крошки
+            let bc = 'Каталог';
+            if (currentCat === 'men') bc = 'Мужские';
+            else if (currentCat === 'women') bc = 'Женские';
+            else if (currentCat === 'kids') bc = 'Дети';
+            if (onlySale) bc = 'Sale';
+            document.getElementById('breadcrumb').textContent = bc;
+
+            // Бренды
+            const brands = [...new Set(PRODUCTS.map(p => p.brand))].sort();
+            document.getElementById('brandFilters').innerHTML = brands.map(b =>
+                `<label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="brand-filter" value="${b}"> ${b}</label>`
+            ).join('');
+            document.querySelectorAll('.brand-filter').forEach(c => {
+                c.addEventListener('change', () => {
+                    currentBrands = Array.from(document.querySelectorAll('.brand-filter:checked')).map(x => x.value);
+                    currentPage = 1;
+                    render();
+                });
+            });
+
+            // Предустановка бренда из URL
+            if (currentBrand) {
+                const el = document.querySelector(`.brand-filter[value="${currentBrand}"]`);
+                if (el) {
+                    el.checked = true;
+                    currentBrands = [currentBrand];
+                }
+            }
+
+            render();
+            createLeaves();
+        })();
+
+        function filterProducts() {
+            let list = [...PRODUCTS];
+            if (onlySale) list = list.filter(p => p.oldPrice);
+            if (currentCat !== 'all') list = list.filter(p => p.category === currentCat);
+            if (currentType !== 'all') list = list.filter(p => p.type === currentType);
+            if (currentSeason !== 'all') list = list.filter(p => p.season === currentSeason);
+            if (currentBrands.length) list = list.filter(p => currentBrands.includes(p.brand));
+            list = list.filter(p => p.price >= currentPriceMin && p.price <= currentPriceMax);
+
+            // Поиск
+            if (currentSearch) {
+                const q = currentSearch.toLowerCase();
+                list = list.filter(p =>
+                    p.name.toLowerCase().includes(q) ||
+                    p.brand.toLowerCase().includes(q)
+                );
+            }
+            // Фильтр по бренду из URL
+            if (currentBrand) {
+                list = list.filter(p => p.brand === currentBrand);
+            }
+
+            if (currentSort === 'price-asc') list.sort((a, b) => a.price - b.price);
+            else if (currentSort === 'price-desc') list.sort((a, b) => b.price - a.price);
+            else if (currentSort === 'rating') list.sort((a, b) => b.rating - a.rating);
+            else if (currentSort === 'popular') list.sort((a, b) => b.orders - a.orders);
+
+            return list;
+        }
+
+        function render() {
+            const all = filterProducts();
+            const total = all.length;
+            const totalPages = Math.ceil(total / perPage);
+            const start = (currentPage - 1) * perPage;
+            const list = all.slice(start, start + perPage);
+
+            const searchInfo = document.getElementById('searchInfo');
+            if (currentSearch) {
+                searchInfo.textContent = `Результаты по запросу: "${currentSearch}"`;
+                searchInfo.classList.remove('hidden');
+            } else if (currentBrand) {
+                searchInfo.textContent = `Бренд: ${currentBrand}`;
+                searchInfo.classList.remove('hidden');
+            } else {
+                searchInfo.classList.add('hidden');
+            }
+
+            document.getElementById('count').textContent = total;
+
+            if (total === 0) {
+                document.getElementById('grid').innerHTML = '';
+                document.getElementById('empty').classList.remove('hidden');
+                document.getElementById('pagination').innerHTML = '';
+            } else {
+                document.getElementById('empty').classList.add('hidden');
+                document.getElementById('grid').innerHTML = list.map(productCard).join('');
+
+                let pag = '';
+                if (totalPages > 1) {
+                    for (let i = 1; i <= totalPages; i++) {
+                        pag += `<button onclick="goPage(${i})" class="px-4 py-2 rounded-lg font-bold text-sm ${i === currentPage ? 'bg-gray-900 text-white' : 'border border-gray-300 hover:bg-gray-100'}">${i}</button>`;
+                    }
+                }
+                document.getElementById('pagination').innerHTML = pag;
+            }
+
+            updateCartCount();
+            updateFavCount();
+        }
+
+        function goPage(n) {
+            currentPage = n;
+            render();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('input[name="cat"]').forEach(r => {
+            r.addEventListener('change', () => { currentCat = r.value; currentPage = 1; render(); });
+        });
+        document.querySelectorAll('input[name="type"]').forEach(r => {
+            r.addEventListener('change', () => { currentType = r.value; currentPage = 1; render(); });
+        });
+        document.querySelectorAll('input[name="season"]').forEach(r => {
+            r.addEventListener('change', () => { currentSeason = r.value; currentPage = 1; render(); });
+        });
+        document.getElementById('sort').addEventListener('change', (e) => {
+            currentSort = e.target.value; currentPage = 1; render();
+        });
+        document.getElementById('onlySale').addEventListener('change', (e) => {
+            onlySale = e.target.checked; currentPage = 1; render();
+        });
+
+        function applyFilters() {
+            currentPriceMin = parseInt(document.getElementById('priceMin').value) || 0;
+            currentPriceMax = parseInt(document.getElementById('priceMax').value) || Infinity;
+            currentPage = 1;
+            render();
+        }
+        function resetFilters() {
+            currentCat = 'all'; currentType = 'all'; currentSeason = 'all'; currentBrands = []; currentPriceMin = 0; currentPriceMax = Infinity; currentSort = 'default'; onlySale = false; currentPage = 1;
+            document.querySelector('input[name="cat"][value="all"]').checked = true;
+            document.querySelector('input[name="type"][value="all"]').checked = true;
+            document.querySelector('input[name="season"][value="all"]').checked = true;
+            document.querySelectorAll('.brand-filter').forEach(c => c.checked = false);
+            document.getElementById('priceMin').value = '';
+            document.getElementById('priceMax').value = '';
+            document.getElementById('sort').value = 'default';
+            document.getElementById('onlySale').checked = false;
+            render();
+        }
+
+        // Осенние листья
+        function createLeaves() {
+            const leaves = ['🍂', '🍁', '🍃'];
+            for (let i = 0; i < 15; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDuration = (8 + Math.random() * 6) + 's';
+                leaf.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(leaf);
+            }
+        }
+    </script>
+
+</body>
+</html>

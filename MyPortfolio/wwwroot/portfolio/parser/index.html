@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Парсер данных</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Парсер данных</h1>
+        <div class="flex gap-2 mb-6">
+            <input id="url" type="text" placeholder="Введите URL..." value="https://example.com" class="flex-1 p-3 border rounded-lg">
+            <button onclick="parse()" class="px-6 py-3 bg-gray-900 text-white rounded-lg">Парсить</button>
+        </div>
+        <div id="result" class="bg-white rounded-xl shadow-sm overflow-hidden hidden">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-100">
+                    <tr><th class="p-3 text-left">Название</th><th class="p-3 text-left">Цена</th><th class="p-3 text-left">Наличие</th></tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function parse() {
+            const fakeData = [
+                {name:'Товар A', price:'1 200 ₽', stock:'Есть'},
+                {name:'Товар B', price:'2 500 ₽', stock:'Нет'},
+                {name:'Товар C', price:'890 ₽', stock:'Есть'},
+                {name:'Товар D', price:'3 400 ₽', stock:'Есть'},
+            ];
+            document.getElementById('tbody').innerHTML = fakeData.map(d =>
+                `<tr class="border-t"><td class="p-3">${d.name}</td><td class="p-3">${d.price}</td><td class="p-3">${d.stock}</td></tr>`
+            ).join('');
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

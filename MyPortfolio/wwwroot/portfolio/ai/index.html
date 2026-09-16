@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-ассистент</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-gray-900 text-white p-4">
+            <h2 class="font-bold">AI-ассистент</h2>
+            <p class="text-xs text-gray-400">Демо. В реальном проекте — ChatGPT API</p>
+        </div>
+        <div id="chat" class="h-96 overflow-y-auto p-4 space-y-3"></div>
+        <div class="p-4 border-t flex gap-2">
+            <input id="input" type="text" placeholder="Напишите..." class="flex-1 p-3 border rounded-lg outline-none">
+            <button onclick="send()" class="px-6 py-3 bg-gray-900 text-white rounded-lg">→</button>
+        </div>
+    </div>
+
+    <script>
+        const chat = document.getElementById('chat');
+        const replies = [
+            'Интересный вопрос! В реальном проекте я бы подключился к ChatGPT API.',
+            'Я демо-версия. Но могу показать, как выглядит интерфейс.',
+            'Отличная идея! Давайте обсудим детали в реальном проекте.',
+            'Я обучен на демо-данных. В продакшене буду умнее.'
+        ];
+
+        function addMsg(text, isUser) {
+            const div = document.createElement('div');
+            div.className = isUser ? 'text-right' : 'text-left';
+            div.innerHTML = `<span class="inline-block px-4 py-2 rounded-2xl ${isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-900'}">${text}</span>`;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        function send() {
+            const input = document.getElementById('input');
+            const text = input.value.trim();
+            if (!text) return;
+            addMsg(text, true);
+            input.value = '';
+            setTimeout(() => {
+                addMsg(replies[Math.floor(Math.random() * replies.length)], false);
+            }, 600);
+        }
+
+        document.getElementById('input').addEventListener('keypress', e => {
+            if (e.key === 'Enter') send();
+        });
+
+        addMsg('Привет! Я AI-ассистент. Чем могу помочь?', false);
+    </script>
+</body>
+</html>

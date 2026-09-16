@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fade & Blade — Барбершоп в Москве</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            scroll-behavior: smooth;
+            background: #fafafa;
+            color: #1a1a1a;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('/img/barbershop.jpg') center/cover;
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+            .accordion-content.open {
+                max-height: 500px;
+            }
+
+        .master-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f59e0b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="fixed top-0 w-full bg-white z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 py-5 flex justify-between items-center">
+            <a href="#" class="text-3xl font-black tracking-tight text-gray-900">FADE<span class="text-amber-500">&</span>BLADE</a>
+            <div class="hidden md:flex gap-8 text-sm font-semibold text-gray-700">
+                <a href="#about" class="hover:text-amber-500 transition">О нас</a>
+                <a href="#services" class="hover:text-amber-500 transition">Услуги</a>
+                <a href="#masters" class="hover:text-amber-500 transition">Мастера</a>
+                <a href="#reviews" class="hover:text-amber-500 transition">Отзывы</a>
+                <a href="#blog" class="hover:text-amber-500 transition">Блог</a>
+                <a href="#faq" class="hover:text-amber-500 transition">FAQ</a>
+                <a href="#booking" class="hover:text-amber-500 transition">Запись</a>
+            </div>
+            <a href="#booking" class="px-6 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-gray-800 transition text-sm">Записаться</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-bg h-screen flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none text-white">FADE<br>&BLADE</h1>
+            <p class="text-xl md:text-2xl text-gray-200 mt-6">Барбершоп, где стиль решает всё</p>
+            <div class="mt-10 flex gap-4 justify-center flex-wrap">
+                <a href="#booking" class="px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition">Записаться онлайн</a>
+                <a href="#services" class="px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition">Наши услуги</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цифры -->
+    <section id="about" class="py-20 px-4 bg-white border-b border-gray-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="fade-in">
+                <div class="text-5xl md:text-6xl font-black text-amber-500">3 400 +</div>
+                <p class="text-gray-500 mt-3">Клиентов приходят к нам каждый месяц</p>
+            </div>
+            <div class="fade-in">
+                <div class="text-5xl md:text-6xl font-black text-amber-500">18 +</div>
+                <p class="text-gray-500 mt-3">Мастеров с опытом от 5 лет</p>
+            </div>
+            <div class="fade-in">
+                <div class="text-5xl md:text-6xl font-black text-amber-500">6 +</div>
+                <p class="text-gray-500 mt-3">Барбершопов в Москве и области</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="py-24 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-5xl font-black text-gray-900">УСЛУГИ</h2>
+            <p class="text-gray-500 mt-3">Выбери то, что нужно именно тебе</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <a href="/portfolio/vizitka/services/haircut.html" class="bg-white p-8 rounded-2xl card-hover fade-in border border-gray-200 block">
+                <div class="text-5xl mb-4">✂️</div>
+                <h3 class="text-2xl font-bold text-gray-900">Стрижка</h3>
+                <p class="text-gray-500 mt-2">Классическая или модная — подберём под твой стиль.</p>
+                <p class="text-3xl font-black text-amber-500 mt-6">от 1 000 ₽</p>
+                <div class="mt-4 text-amber-500 font-semibold text-sm">Смотреть все цены →</div>
+            </a>
+            <a href="/portfolio/vizitka/services/beard.html" class="bg-white p-8 rounded-2xl card-hover fade-in border border-gray-200 block">
+                <div class="text-5xl mb-4">🧔</div>
+                <h3 class="text-2xl font-bold text-gray-900">Борода</h3>
+                <p class="text-gray-500 mt-2">Моделирование, уход, королевское бритьё.</p>
+                <p class="text-3xl font-black text-amber-500 mt-6">от 800 ₽</p>
+                <div class="mt-4 text-amber-500 font-semibold text-sm">Смотреть все цены →</div>
+            </a>
+            <a href="/portfolio/vizitka/services/complex.html" class="bg-white p-8 rounded-2xl card-hover fade-in border border-gray-200 block">
+                <div class="text-5xl mb-4">👑</div>
+                <h3 class="text-2xl font-bold text-gray-900">Комплекс</h3>
+                <p class="text-gray-500 mt-2">Стрижка + борода + уход. Полный образ.</p>
+                <p class="text-3xl font-black text-amber-500 mt-6">от 1 800 ₽</p>
+                <div class="mt-4 text-amber-500 font-semibold text-sm">Смотреть все цены →</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Почему мы -->
+    <section class="py-24 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-black text-gray-900">ПОЧЕМУ МЫ</h2>
+                <p class="text-gray-500 mt-3">Три причины, почему нас выбирают</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover fade-in">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h3 class="text-xl font-bold text-gray-900">Индивидуальный подход</h3>
+                    <p class="text-gray-500 mt-3">Подбираем образ под тип лица, стиль и характер. Не шаблон — а твоя стрижка.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover fade-in">
+                    <div class="text-4xl mb-4">💈</div>
+                    <h3 class="text-xl font-bold text-gray-900">Опытные мастера</h3>
+                    <p class="text-gray-500 mt-3">Средний стаж — 6 лет. Следим за мировыми трендами и учимся постоянно.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover fade-in">
+                    <div class="text-4xl mb-4">🥃</div>
+                    <h3 class="text-xl font-bold text-gray-900">Атмосфера</h3>
+                    <p class="text-gray-500 mt-3">Виски, кофе, хорошая музыка. Приходишь за стрижкой — уходишь отдохнувшим.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Мастера -->
+    <section id="masters" class="py-24 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-5xl font-black text-gray-900">МАСТЕРА</h2>
+            <p class="text-gray-500 mt-3">Люди, которые знают своё дело</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="text-center card-hover fade-in">
+                <img src="/img/barbershop.jpg" alt="Алексей" class="master-photo mx-auto">
+                <h3 class="text-2xl font-bold mt-6 text-gray-900">Алексей</h3>
+                <p class="text-gray-500">Топ-барбер, 8 лет опыта</p>
+            </div>
+            <div class="text-center card-hover fade-in">
+                <img src="/img/barbershop.jpg" alt="Дмитрий" class="master-photo mx-auto">
+                <h3 class="text-2xl font-bold mt-6 text-gray-900">Дмитрий</h3>
+                <p class="text-gray-500">Специалист по бороде, 5 лет</p>
+            </div>
+            <div class="text-center card-hover fade-in">
+                <img src="/img/barbershop.jpg" alt="Иван" class="master-photo mx-auto">
+                <h3 class="text-2xl font-bold mt-6 text-gray-900">Иван</h3>
+                <p class="text-gray-500">Универсал, 6 лет опыта</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section id="reviews" class="py-24 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-black text-gray-900">ОТЗЫВЫ</h2>
+                <p class="text-gray-500 mt-3">Что говорят наши клиенты</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover fade-in">
+                    <div class="text-amber-500 text-xl mb-3">★★★★★</div>
+                    <p class="text-gray-600 italic">«Хожу уже полгода. Ни разу не пожалел. Мастера слушают, делают именно то, что просишь. Атмосфера — топ.»</p>
+                    <p class="text-gray-900 font-bold mt-4">— Михаил, 32 года</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover fade-in">
+                    <div class="text-amber-500 text-xl mb-3">★★★★★</div>
+                    <p class="text-gray-600 italic">«Привёл сына на первую стрижку. Мастер нашёл подход, сын не боялся. Теперь ходим вместе.»</p>
+                    <p class="text-gray-900 font-bold mt-4">— Андрей, 38 лет</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 card-hover fade-in">
+                    <div class="text-amber-500 text-xl mb-3">★★★★★</div>
+                    <p class="text-gray-600 italic">«Записался через сайт за минуту. Пришёл — приняли вовремя. Стрижка держится месяц. Рекомендую.»</p>
+                    <p class="text-gray-900 font-bold mt-4">— Сергей, 27 лет</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блог -->
+    <section id="blog" class="py-24 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-end mb-12 fade-in">
+                <div>
+                    <h2 class="text-5xl font-black text-gray-900">СТАТЬИ</h2>
+                    <p class="text-gray-500 mt-3">Полезное о мужском уходе</p>
+                </div>
+                <a href="https://dzen.ru/id/600f284a2ab10933db3aede4" target="_blank" class="text-amber-500 font-semibold hover:text-amber-600 transition text-sm">Все статьи →</a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <a href="https://dzen.ru/id/600f284a2ab10933db3aede4" target="_blank" class="bg-white rounded-2xl overflow-hidden border border-gray-200 card-hover fade-in block">
+                    <div class="h-48 bg-amber-100"></div>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-400">Дзен · Мужской стиль</p>
+                        <h3 class="text-xl font-bold mt-2 text-gray-900">Стоит ли отпускать бороду и как это делать правильно?</h3>
+                        <p class="text-gray-500 text-sm mt-3">Разбираем плюсы и минусы, советы по уходу.</p>
+                    </div>
+                </a>
+                <a href="https://dzen.ru/id/5ef1d7521ba1f14c32bcc597" target="_blank" class="bg-white rounded-2xl overflow-hidden border border-gray-200 card-hover fade-in block">
+                    <div class="h-48 bg-amber-100"></div>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-400">Дзен · Мужской журнал</p>
+                        <h3 class="text-xl font-bold mt-2 text-gray-900">Как отрастить бороду и поддерживать её в форме</h3>
+                        <p class="text-gray-500 text-sm mt-3">Советы парикмахеров по уходу и косметике.</p>
+                    </div>
+                </a>
+                <a href="https://dzen.ru/id/686aa3013af4380e0b7d46e6?tab=articles" target="_blank" class="bg-white rounded-2xl overflow-hidden border border-gray-200 card-hover fade-in block">
+                    <div class="h-48 bg-amber-100"></div>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-400">Дзен · Барбершоп Л.Е.В.</p>
+                        <h3 class="text-xl font-bold mt-2 text-gray-900">Борода, которая создана для вашего лица: гид по формам</h3>
+                        <p class="text-gray-500 text-sm mt-3">Как подобрать форму бороды под тип лица.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 px-4 max-w-4xl mx-auto bg-gray-50">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-5xl font-black text-gray-900">ВОПРОС-ОТВЕТ</h2>
+            <p class="text-gray-500 mt-3">Частые вопросы о барбершопе</p>
+        </div>
+        <div class="space-y-4">
+            <div class="bg-white rounded-xl border border-gray-200 fade-in">
+                <button class="accordion-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center text-gray-900 hover:text-amber-500 transition">
+                    Почему именно ваш барбершоп?
+                    <span class="text-amber-500 text-2xl">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-500 pb-6">Мы работаем только с мужчинами — и в этом мы сильнее универсальных салонов. Подбираем образ под каждого клиента, а не штампуем стрижки.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 fade-in">
+                <button class="accordion-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center text-gray-900 hover:text-amber-500 transition">
+                    Как объяснить мастеру, что я хочу?
+                    <span class="text-amber-500 text-2xl">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-500 pb-6">Лучший вариант — показать фото. Если прямого запроса нет, мастер предложит варианты и расскажет, как будет выглядеть результат.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 fade-in">
+                <button class="accordion-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center text-gray-900 hover:text-amber-500 transition">
+                    В барбершопе стригут только бороды?
+                    <span class="text-amber-500 text-2xl">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-500 pb-6">Нет. Мы стрижём волосы, работаем с бородой и даже стрижём детей. Разница в том, что мы работаем только с мужчинами.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-200 fade-in">
+                <button class="accordion-btn w-full text-left p-6 font-bold text-lg flex justify-between items-center text-gray-900 hover:text-amber-500 transition">
+                    А вы стрижёте длинные волосы?
+                    <span class="text-amber-500 text-2xl">+</span>
+                </button>
+                <div class="accordion-content px-6">
+                    <p class="text-gray-500 pb-6">Да! Наши мастера справляются с любой длиной. Если отращиваешь — смело приходи, оформим красиво.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма записи -->
+    <section id="booking" class="py-24 px-4 max-w-xl mx-auto bg-white">
+        <div class="text-center mb-12 fade-in">
+            <h2 class="text-5xl font-black text-gray-900">ЗАПИСЬ</h2>
+            <p class="text-gray-500 mt-3">Оставь заявку — перезвоним за 5 минут</p>
+        </div>
+        <form id="bookingForm" class="space-y-4 fade-in">
+            <input type="text" name="name" placeholder="Ваше имя" required
+                   class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-amber-500 outline-none transition text-gray-900">
+            <input type="tel" name="phone" placeholder="Телефон" required
+                   class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-amber-500 outline-none transition text-gray-900">
+            <select name="service"
+                    class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-amber-500 outline-none transition text-gray-900">
+                <option>Стрижка — от 1 000 ₽</option>
+                <option>Борода — от 800 ₽</option>
+                <option>Комплекс — от 1 800 ₽</option>
+            </select>
+            <select name="master"
+                    class="w-full p-4 rounded-xl bg-gray-50 border border-gray-300 focus:border-amber-500 outline-none transition text-gray-900">
+                <option>Алексей</option>
+                <option>Дмитрий</option>
+                <option>Иван</option>
+                <option>Любой</option>
+            </select>
+            <button type="submit"
+                    class="w-full py-4 bg-gray-900 text-white font-black rounded-xl hover:bg-gray-800 transition text-lg">
+                ЗАПИСАТЬСЯ
+            </button>
+        </form>
+        <p id="msg" class="text-center mt-4 text-green-600 font-bold hidden">✅ Заявка отправлена! Мы перезвоним.</p>
+    </section>
+
+    <!-- Яндекс.Карта -->
+    <section class="py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto text-center fade-in">
+            <h2 class="text-4xl font-black text-gray-900 mb-6">КАК НАС НАЙТИ</h2>
+            <div class="rounded-2xl border border-gray-200 overflow-hidden">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=37.592624%2C55.750460&z=16&pt=37.592624,55.750460,pm2rdm"
+                        width="100%" height="400" frameborder="0" allowfullscreen="true">
+                </iframe>
+            </div>
+            <p class="text-gray-500 mt-6">ул. Арбат, 10, Москва · +7 (999) 123-45-67</p>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="py-12 px-4 bg-white border-t border-gray-200 text-center">
+        <div class="text-3xl font-black mb-4 text-gray-900">FADE<span class="text-amber-500">&</span>BLADE</div>
+        <p class="text-gray-500">ул. Арбат, 10, Москва · +7 (999) 123-45-67</p>
+        <div class="flex justify-center gap-6 mt-4 text-sm text-gray-500">
+            <a href="#about" class="hover:text-amber-500 transition">О нас</a>
+            <a href="#services" class="hover:text-amber-500 transition">Услуги</a>
+            <a href="#masters" class="hover:text-amber-500 transition">Мастера</a>
+            <a href="#reviews" class="hover:text-amber-500 transition">Отзывы</a>
+            <a href="#blog" class="hover:text-amber-500 transition">Блог</a>
+            <a href="#faq" class="hover:text-amber-500 transition">FAQ</a>
+        </div>
+        <p class="text-gray-400 text-sm mt-6">© 2026 Fade & Blade. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('msg').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('msg').classList.add('hidden'), 4000);
+        });
+
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+                document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+                document.querySelectorAll('.accordion-btn span').forEach(s => s.textContent = '+');
+                if (!isOpen) {
+                    content.classList.add('open');
+                    btn.querySelector('span').textContent = '−';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

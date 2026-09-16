@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар — SOLEHOUSE</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+        }
+
+        .product-placeholder {
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .size-btn {
+            transition: all 0.2s;
+        }
+
+            .size-btn:hover, .size-btn.active {
+                background: #111;
+                color: white;
+                border-color: #111;
+            }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            }
+
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .review-card {
+            transition: all 0.3s;
+        }
+
+            .review-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            }
+    </style>
+</head>
+<body>
+
+    <header class="border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-black">SOLE<span class="text-amber-500">HOUSE</span></a>
+            <div class="flex items-center gap-5 text-sm font-semibold">
+                <a href="favorites.html" class="hover:text-amber-500 relative text-lg">♡ <span id="favCount" class="absolute -top-2 -right-3 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span></a>
+                <a href="cart.html" class="hover:text-amber-500 relative text-lg">🛒 <span id="cartCount" class="absolute -top-2 -right-3 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span></a>
+                <div id="authButton"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-gray-500">
+        <a href="index.html" class="hover:text-amber-500">Главная</a> /
+        <a href="catalog.html" class="hover:text-amber-500">Каталог</a> /
+        <span id="bcName">Товар</span>
+    </div>
+
+    <main id="productPage" class="max-w-7xl mx-auto px-4 pb-20"></main>
+
+    <section id="similarSection" class="max-w-7xl mx-auto px-4 py-16 hidden">
+        <h2 class="text-3xl font-black mb-8">ПОХОЖИЕ ТОВАРЫ</h2>
+        <div id="similarGrid" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+    </section>
+
+    <script src="/portfolio/shop/fallback/js/auth.js"></script>
+    <script src="/portfolio/shop/fallback/js/shop.js"></script>
+    <script>
+        // Шаблоны отзывов
+        const REVIEW_TEMPLATES = [
+            { name: 'Михаил К.', rating: 5, text: 'Отличные кроссовки, хожу месяц. Качество на высоте, размер в размер. Рекомендую!' },
+            { name: 'Анна С.', rating: 5, text: 'Заказала мужу, доволен. Доставка быстрая, всё пришло в идеальном виде. Спасибо!' },
+            { name: 'Дмитрий В.', rating: 4, text: 'Хорошие, но немного жестковаты первые дни. Потом разносились — идеально сидят.' },
+            { name: 'Елена П.', rating: 5, text: 'Беру уже вторую пару, всё супер! Качество не подводит, носятся долго.' },
+            { name: 'Игорь М.', rating: 5, text: 'Оригинал, всё как на фото. Упаковка отличная, пришли за 2 дня. Рекомендую!' },
+            { name: 'Ольга Н.', rating: 4, text: 'Норм, но цвет чуть темнее, чем на сайте. В остальном всё отлично.' },
+            { name: 'Артём Л.', rating: 5, text: 'Лучшие кроссовки за эти деньги. Комфорт на весь день, ноги не устают.' },
+            { name: 'Светлана Р.', rating: 5, text: 'Дочка в восторге, носит не снимая. Качество отличное, размер подошёл.' },
+            { name: 'Павел Ж.', rating: 5, text: 'Пришли быстро, упаковка целая. Качество на уровне, буду брать ещё.' },
+            { name: 'Мария Т.', rating: 4, text: 'Хорошие, но чуть великоваты. Берите на полразмера меньше — и будет идеально.' },
+            { name: 'Роман Д.', rating: 5, text: 'Крутые! Дизайн огонь, удобные. Ношу каждый день уже полгода — как новые.' },
+            { name: 'Виктория А.', rating: 5, text: 'Идеально подошли по размеру. Стильные, удобные, качественные. Рекомендую!' },
+            { name: 'Сергей Б.', rating: 4, text: 'Хорошие кроссовки, но шнурки могли бы быть длиннее. В целом доволен покупкой.' },
+            { name: 'Наталья К.', rating: 5, text: 'Заказала сыну в школу. Носит месяц — выглядят как новые. Отличная покупка!' },
+            { name: 'Александр Т.', rating: 5, text: 'Качество супер, амортизация отличная. Для города — идеальный вариант.' }
+        ];
+
+        // Генератор отзывов — разные для каждого товара
+        function getReviews(productId) {
+            const reviews = [];
+            const used = new Set();
+            let i = 0;
+            while (reviews.length < 3 && i < 50) {
+                const seed = productId * 100 + i;
+                const rand = Math.abs(Math.sin(seed) * 10000) % 1;
+                const idx = Math.floor(rand * REVIEW_TEMPLATES.length);
+                if (!used.has(idx)) {
+                    used.add(idx);
+                    reviews.push(REVIEW_TEMPLATES[idx]);
+                }
+                i++;
+            }
+            return reviews;
+        }
+
+        // Описание по бренду
+        function getDescription(p) {
+            const descs = {
+                'Nike': `Культовая модель ${p.name} от Nike. Технология Air обеспечивает отличную амортизацию при каждом шаге, а дышащий верх из премиальных материалов сохраняет комфорт даже в жаркий день. Подошва из износостойкой резины гарантирует долговечность. Идеальны для города, прогулок и повседневной носки.`,
+                'Adidas': `Классическая модель ${p.name} от Adidas. Технология Boost для максимального комфорта и возврата энергии, стильный узнаваемый дизайн. Верх из качественных материалов, подошва с отличным сцеплением. Подходит как для спорта, так и для повседневной жизни.`,
+                'New Balance': `Модель ${p.name} от New Balance. Легендарное качество и комфорт, проверенные десятилетиями. Амортизирующая подошва с технологией ENCAP, премиальные материалы верха. Отличный выбор для тех, кто ценит стиль и удобство.`,
+                'Puma': `Модель ${p.name} от Puma. Спортивный стиль и максимальный комфорт. Износостойкая подошва с отличным сцеплением, дышащие материалы верха. Созданы для активной жизни и повседневной носки.`,
+                'Vans': `Классические ${p.name} от Vans. Настоящий скейтерский стиль, прочная подошва с фирменным вафельным протектором. Верх из плотной ткани или замши. Идеальны для города и активного отдыха.`,
+                'Converse': `Легендарные ${p.name} от Converse. Культовая модель, которая никогда не выходит из моды. Плотный текстиль или кожа верха, резиновая подошва с характерным дизайном. Для тех, кто ценит классику.`,
+                'Jordan': `Модель ${p.name} от Jordan. Легендарный стиль и премиальные материалы. Коллекционная модель для настоящих ценителей. Технология Air в подошве, узнаваемый дизайн.`,
+                'Salomon': `Модель ${p.name} от Salomon. Технологичная обувь для города и трейла. Прочная подошва с агрессивным протектором, защита от влаги, система быстрой шнуровки Quicklace. Для активных людей.`,
+                'Timberland': `Модель ${p.name} от Timberland. Прочные ботинки для города и природы. Водоотталкивающая кожа премиум-качества, надёжная подошва с амортизацией. Служат годами, не теряя вида.`,
+                'Dr. Martens': `Модель ${p.name} от Dr. Martens. Культовые ботинки с уникальной воздушной подошвой AirWair. Кожа премиум-качества, комфорт на годы. Настоящая классика, которая с годами становится только лучше.`,
+                'Birkenstock': `Модель ${p.name} от Birkenstock. Анатомическая колодка из натурального латекса и пробки, премиальные материалы. Комфорт для ног на весь день. Идеальны для тех, кто заботится о здоровье стоп.`,
+                'Crocs': `Модель ${p.name} от Crocs. Лёгкие, удобные, дышащие. Технология Croslite для максимального комфорта. Идеальны для дома, дачи, пляжа и прогулок. Легко моются.`,
+                'Asics': `Модель ${p.name} от Asics. Технология Gel для отличной амортизации, поддержка стопы на высшем уровне. Созданы для бега и активного образа жизни. Дышащий верх, прочная подошва.`,
+                'Reebok': `Модель ${p.name} от Reebok. Классический дизайн и высокое качество. Кожаный верх, амортизирующая подошва. Универсальные — подходят для спорта и повседневной носки.`,
+                'Skechers': `Модель ${p.name} от Skechers. Максимальный комфорт и мягкость при ходьбе. Технология Memory Foam в стельке, лёгкая подошва. Для тех, кто ценит удобство.`,
+                'ECCO': `Модель ${p.name} от ECCO. Премиальное качество и комфорт. Натуральная кожа, анатомическая стелька, гибкая подошва. Для тех, кто ценит европейское качество.`,
+                'Clarks': `Модель ${p.name} от Clarks. Классический стиль и комфорт. Натуральная кожа, мягкая стелька, удобная колодка. Для повседневной носки и работы.`
+            };
+            return descs[p.brand] || `Модель ${p.brand} ${p.name}. Качественная обувь для повседневной носки. Комфорт, стиль и долговечность — всё, что нужно на каждый день.`;
+        }
+
+        // Характеристики по типу
+        function getSpecs(p) {
+            const typeNames = { sneakers: 'Кроссовки', boots: 'Ботинки', sandal: 'Сандалии' };
+            const catNames = { men: 'Мужские', women: 'Женские', kids: 'Детские' };
+            return `
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Бренд</span><span class="font-bold">${p.brand}</span></div>
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Модель</span><span class="font-bold">${p.name}</span></div>
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Категория</span><span class="font-bold">${catNames[p.category] || p.category}</span></div>
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Тип</span><span class="font-bold">${typeNames[p.type] || p.type}</span></div>
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Цвет</span><span class="font-bold">${p.color}</span></div>
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Рейтинг</span><span class="font-bold">★ ${p.rating} (${p.reviews} отзывов)</span></div>
+                    <div class="flex justify-between border-b py-2"><span class="text-gray-500">Заказов</span><span class="font-bold">${p.orders}</span></div>
+                    <div class="flex justify-between py-2"><span class="text-gray-500">Страна</span><span class="font-bold">Вьетнам</span></div>
+                `;
+        }
+
+        (async () => {
+            await loadProducts();
+            const id = parseInt(new URLSearchParams(window.location.search).get('id'));
+            const p = PRODUCTS.find(x => x.id === id);
+
+            if (!p) {
+                document.getElementById('productPage').innerHTML = '<p class="text-2xl font-bold text-center py-20">Товар не найден</p>';
+                return;
+            }
+
+            document.getElementById('bcName').textContent = p.name;
+            const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+            const sizes = p.type === 'sandal' ? ['36', '37', '38', '39', '40', '41', '42'] : ['39', '40', '41', '42', '43', '44', '45'];
+
+            // Отзывы
+            const reviews = getReviews(p.id);
+
+            document.getElementById('productPage').innerHTML = `
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <div class="aspect-square rounded-3xl product-placeholder">
+                                <img src="/img/barbershop.jpg" alt="${p.name}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="grid grid-cols-4 gap-3 mt-4">
+                                ${[1, 2, 3, 4].map(() => `<div class="aspect-square rounded-xl product-placeholder cursor-pointer hover:ring-2 ring-amber-500"><img src="/img/barbershop.jpg" class="w-full h-full object-cover opacity-70" alt=""></div>`).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-semibold">${p.brand}</p>
+                            <h1 class="text-3xl md:text-4xl font-black mt-2">${p.name}</h1>
+                            <div class="flex items-center gap-2 mt-3 text-sm">
+                                <span class="text-amber-500 text-lg">★</span>
+                                <span class="font-bold">${p.rating}</span>
+                                <span class="text-gray-500">· ${p.reviews} отзывов · ${p.orders} заказов</span>
+                            </div>
+                            <div class="flex items-center gap-3 mt-6">
+                                <span class="text-4xl font-black">${p.price.toLocaleString('ru-RU')} ₽</span>
+                                ${p.oldPrice ? `<span class="text-xl text-gray-400 line-through">${p.oldPrice.toLocaleString('ru-RU')} ₽</span>` : ''}
+                                ${p.oldPrice ? `<span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">-${discount}%</span>` : ''}
+                            </div>
+
+                            <div class="mt-8">
+                                <h3 class="font-bold mb-3">Размер</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    ${sizes.map((s, i) => `<button onclick="selectSize(this)" class="size-btn px-4 py-3 border border-gray-300 rounded-lg font-bold text-sm ${i === 3 ? 'active' : ''}">${s}</button>`).join('')}
+                                </div>
+                            </div>
+
+                            <div class="mt-8 flex gap-3">
+                                <button onclick="addToCart(${p.id})" class="flex-1 py-4 bg-gray-900 text-white font-black rounded-xl hover:bg-amber-500 transition">В КОРЗИНУ</button>
+                                <button onclick="toggleFavorite(${p.id}); this.innerHTML = getFavorites().includes(${p.id}) ? '♥' : '♡'; this.classList.toggle('text-red-500')"
+                                        class="px-6 py-4 border-2 border-gray-300 rounded-xl text-2xl hover:border-red-500 transition">♡</button>
+                            </div>
+
+                            <div class="mt-8 space-y-3 text-sm text-gray-600">
+                                <p>✓ Оригинал 100% · Гарантия качества</p>
+                                <p>✓ Доставка 2 дня по России</p>
+                                <p>✓ Возврат 30 дней без вопросов</p>
+                                <p>✓ Примерка перед покупкой</p>
+                            </div>
+
+                            <!-- Описание -->
+                            <div class="mt-8 border-t pt-6">
+                                <h3 class="text-xl font-black mb-3">Описание</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">${getDescription(p)}</p>
+                            </div>
+
+                            <!-- Характеристики -->
+                            <div class="mt-8 border-t pt-6">
+                                <h3 class="text-xl font-black mb-3">Характеристики</h3>
+                                <div class="text-sm">
+                                    ${getSpecs(p)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Отзывы -->
+                    <div class="mt-20">
+                        <div class="flex justify-between items-end mb-8">
+                            <h2 class="text-3xl font-black">ОТЗЫВЫ (${p.reviews})</h2>
+                            <button onclick="showToast('Форма отзыва (демо)')" class="px-6 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-amber-500 transition text-sm">Написать отзыв</button>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            ${reviews.map(r => `
+                                <div class="review-card bg-gray-50 p-6 rounded-2xl">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="font-bold">${r.name}</span>
+                                        <span class="text-amber-500">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 leading-relaxed">${r.text}</p>
+                                    <p class="text-xs text-gray-400 mt-4">Покупка подтверждена</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+            // Похожие товары
+            const similar = PRODUCTS.filter(x => x.id !== p.id && (x.category === p.category || x.brand === p.brand)).slice(0, 4);
+            if (similar.length > 0) {
+                document.getElementById('similarSection').classList.remove('hidden');
+                document.getElementById('similarGrid').innerHTML = similar.map(productCard).join('');
+            }
+
+            updateCartCount();
+            updateFavCount();
+        })();
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дашборд</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Аналитика продаж</h1>
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+                <p class="text-gray-500 text-sm">Выручка</p>
+                <p class="text-3xl font-bold">1 240 000 ₽</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+                <p class="text-gray-500 text-sm">Заказы</p>
+                <p class="text-3xl font-bold">342</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm">
+                <p class="text-gray-500 text-sm">Средний чек</p>
+                <p class="text-3xl font-bold">3 625 ₽</p>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        new Chart(document.getElementById('chart'), {
+            type: 'line',
+            data: {
+                labels: ['Янв','Фев','Мар','Апр','Май','Июн'],
+                datasets: [{
+                    label: 'Продажи',
+                    data: [120, 190, 300, 250, 420, 380],
+                    borderColor: '#111827',
+                    tension: 0.4
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

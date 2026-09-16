@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное — SOLEHOUSE</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            }
+
+        .product-placeholder {
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black">SOLE<span class="text-amber-500">HOUSE</span></a>
+            <div class="flex items-center gap-4 text-sm font-semibold">
+                <button id="geoDisplay" onclick="showGeoModal(); localStorage.removeItem('geo');" class="text-xs text-gray-500 hover:text-amber-500 transition hidden md:block">📍 Выбрать город</button>
+                <a href="favorites.html" class="hover:text-amber-500 relative">♡ <span id="favCount" class="bg-amber-500 text-white text-xs rounded-full px-1.5">0</span></a>
+                <a href="cart.html" class="hover:text-amber-500 relative">🛒 <span id="cartCount" class="bg-gray-900 text-white text-xs rounded-full px-1.5">0</span></a>
+                <div id="authButton"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <h1 class="text-4xl font-black mb-8">ИЗБРАННОЕ</h1>
+        <div id="favPage"></div>
+    </main>
+    <script src="/portfolio/shop/fallback/js/auth.js"></script>
+    <script src="/portfolio/shop/fallback/js/shop.js"></script>
+    <script>
+        (async () => {
+            await loadProducts();
+            renderFavs();
+        })();
+
+        function renderFavs() {
+            const favs = getFavorites();
+            const list = PRODUCTS.filter(p => favs.includes(p.id));
+
+            if (list.length === 0) {
+                document.getElementById('favPage').innerHTML = `
+                        <div class="text-center py-20">
+                            <p class="text-2xl font-bold mb-4">Список избранного пуст</p>
+                            <a href="catalog.html" class="inline-block px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-amber-500 transition">Перейти в каталог</a>
+                        </div>
+                    `;
+                return;
+            }
+
+            document.getElementById('favPage').innerHTML = `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        ${list.map(productCard).join('')}
+                    </div>
+                `;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,600 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLEHOUSE — Магазин кроссовок</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+        }
+        .leaf {
+            position: fixed;
+            font-size: 24px;
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        .autumn-banner {
+            background: linear-gradient(135deg, #7c2d12, #c2410c, #ea580c, #f59e0b);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 25s linear infinite;
+        }
+
+        .marquee-set {
+            display: flex;
+            gap: 3rem;
+            padding-right: 3rem;
+            flex-shrink: 0;
+        }
+
+        .marquee-item {
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            }
+
+        .product-placeholder {
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+            .hero-slide.active {
+                opacity: 1;
+            }
+
+        .gradient-overlay-1 {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(245,158,11,0.5));
+        }
+
+        .gradient-overlay-2 {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(139,92,246,0.5));
+        }
+
+        .gradient-overlay-3 {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(239,68,68,0.5));
+        }
+
+        .brand-btn {
+            transition: all 0.3s;
+        }
+
+            .brand-btn:hover {
+                transform: translateY(-4px);
+                border-color: #f59e0b;
+            }
+
+        .sticker {
+            transition: all 0.3s;
+        }
+
+            .sticker:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            }
+        /* Мега-меню */
+        .mega-parent {
+            position: relative;
+        }
+
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 24px;
+            min-width: 480px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.2s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .mega-parent:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        /* Чат */
+        #chatWidget {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+        }
+
+        #chatPanel {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 340px;
+            height: 460px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+            #chatPanel.open {
+                display: flex;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Бегущая строка  -->
+    <div class="bg-gray-900 text-white text-xs py-3 overflow-hidden">
+        <div class="marquee">
+            <div class="marquee-set">
+                <span class="marquee-item">🔥 SALE</span>
+                <span class="marquee-item">ОТКРЫТИЕ</span>
+                <span class="marquee-item">ПРОМОКОД <span class="text-amber-400 font-bold">SOLE2026</span></span>
+                <span class="marquee-item">СКИДКА 3000 ₽ НА ПЕРВЫЙ ЗАКАЗ</span>
+                <span class="marquee-item">БЕСПЛАТНАЯ ДОСТАВКА ОТ 5000 ₽</span>
+                <span class="marquee-item">ОРИГИНАЛ 100%</span>
+            </div>
+            <div class="marquee-set">
+                <span class="marquee-item">🔥 SALE</span>
+                <span class="marquee-item">ОТКРЫТИЕ</span>
+                <span class="marquee-item">ПРОМОКОД <span class="text-amber-400 font-bold">SOLE2026</span></span>
+                <span class="marquee-item">СКИДКА 3000 ₽ НА ПЕРВЫЙ ЗАКАЗ</span>
+                <span class="marquee-item">БЕСПЛАТНАЯ ДОСТАВКА ОТ 5000 ₽</span>
+                <span class="marquee-item">ОРИГИНАЛ 100%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="border-b border-gray-200 sticky top-0 bg-white z-50">
+        <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center gap-6">
+            <a href="index.html" class="text-3xl font-black tracking-tight">SOLE<span class="text-amber-500">HOUSE</span></a>
+
+            <!-- Меню -->
+            <nav class="hidden lg:flex gap-6 text-sm font-semibold text-gray-700 items-center">
+                <div class="mega-parent">
+                    <a href="catalog.html?cat=men" class="hover:text-amber-500 transition py-2 block">Мужчинам</a>
+                    <div class="mega-menu">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Обувь</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=men&type=sneakers" class="hover:text-amber-500">Кроссовки</a></li>
+                                    <li><a href="catalog.html?cat=men&type=boots" class="hover:text-amber-500">Ботинки</a></li>
+                                    <li><a href="catalog.html?cat=men&type=sandal" class="hover:text-amber-500">Сандалии</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Бренды</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=men&brand=Nike" class="hover:text-amber-500">Nike</a></li>
+                                    <li><a href="catalog.html?cat=men&brand=Adidas" class="hover:text-amber-500">Adidas</a></li>
+                                    <li><a href="catalog.html?cat=men&brand=New Balance" class="hover:text-amber-500">New Balance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Акции</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?sale=1" class="hover:text-red-500 font-bold">SALE до -50%</a></li>
+                                    <li><a href="catalog.html?sort=popular" class="hover:text-amber-500">Хиты</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mega-parent">
+                    <a href="catalog.html?cat=women" class="hover:text-amber-500 transition py-2 block">Женщинам</a>
+                    <div class="mega-menu">
+                        <div class="grid grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Обувь</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=women&type=sneakers" class="hover:text-amber-500">Кроссовки</a></li>
+                                    <li><a href="catalog.html?cat=women&type=boots" class="hover:text-amber-500">Ботинки</a></li>
+                                    <li><a href="catalog.html?cat=women&type=sandal" class="hover:text-amber-500">Сандалии</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Бренды</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=women&brand=Nike" class="hover:text-amber-500">Nike</a></li>
+                                    <li><a href="catalog.html?cat=women&brand=Adidas" class="hover:text-amber-500">Adidas</a></li>
+                                    <li><a href="catalog.html?cat=women&brand=Birkenstock" class="hover:text-amber-500">Birkenstock</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Акции</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?sale=1" class="hover:text-red-500 font-bold">SALE до -50%</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mega-parent">
+                    <a href="catalog.html?cat=kids" class="hover:text-amber-500 transition py-2 block">Детям</a>
+                    <div class="mega-menu">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Обувь</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=kids&type=sneakers" class="hover:text-amber-500">Кроссовки</a></li>
+                                    <li><a href="catalog.html?cat=kids&type=sandal" class="hover:text-amber-500">Сандалии</a></li>
+                                    <li><a href="catalog.html?cat=kids&type=boots" class="hover:text-amber-500">Ботинки</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xs uppercase text-gray-400 mb-3">Бренды</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a href="catalog.html?cat=kids&brand=Nike" class="hover:text-amber-500">Nike</a></li>
+                                    <li><a href="catalog.html?cat=kids&brand=Adidas" class="hover:text-amber-500">Adidas</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="catalog.html?sale=1" class="hover:text-red-500 transition text-red-500 font-bold">SALE</a>
+            </nav>
+
+            <!-- Поиск -->
+            <div class="hidden md:block flex-1 max-w-xs">
+                <input type="text" id="searchInput" placeholder="Поиск..."
+                       class="w-full px-4 py-2.5 border border-gray-300 rounded-full text-sm outline-none focus:border-amber-500">
+            </div>
+
+            <div class="flex items-center gap-5">
+                <button id="geoDisplay" onclick="showGeoModal(); localStorage.removeItem('geo');" class="text-xs text-gray-500 hover:text-amber-500 transition hidden md:block">📍 Выбрать город</button>
+                <a href="favorites.html" class="text-lg font-semibold text-gray-700 hover:text-amber-500 transition relative">
+                    ♡
+                    <span id="favCount" class="absolute -top-2 -right-3 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+                <a href="cart.html" class="text-lg font-semibold text-gray-700 hover:text-amber-500 transition relative">
+                    🛒
+                    <span id="cartCount" class="absolute -top-2 -right-3 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+                <div id="authButton"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-slider h-[600px] relative">
+        <div class="hero-slide active">
+            <img src="/img/barbershop.jpg" class="w-full h-full object-cover" alt="">
+            <div class="absolute inset-0 gradient-overlay-1"></div>
+            <div class="absolute inset-0 flex items-center px-8 md:px-16">
+                <div class="max-w-2xl text-white">
+                    <p class="text-amber-400 font-bold text-sm tracking-widest mb-3">НОВАЯ КОЛЛЕКЦИЯ 2026</p>
+                    <h1 class="text-5xl md:text-7xl font-black leading-none mb-6">КРОССОВКИ<br>ДЛЯ ГОРОДА</h1>
+                    <p class="text-lg mb-8 opacity-90">120 моделей от Nike, Adidas, New Balance.</p>
+                    <a href="catalog.html" class="inline-block px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition">Смотреть каталог →</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide">
+            <img src="/img/barbershop.jpg" class="w-full h-full object-cover" alt="">
+            <div class="absolute inset-0 gradient-overlay-2"></div>
+            <div class="absolute inset-0 flex items-center px-8 md:px-16">
+                <div class="max-w-2xl text-white">
+                    <p class="text-purple-300 font-bold text-sm tracking-widest mb-3">СКИДКИ ДО 50%</p>
+                    <h1 class="text-5xl md:text-7xl font-black leading-none mb-6">РАСПРОДАЖА<br>ЗИМА</h1>
+                    <p class="text-lg mb-8 opacity-90">Более 40 моделей со скидками.</p>
+                    <a href="catalog.html?sale=1" class="inline-block px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition">К скидкам →</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide">
+            <img src="/img/barbershop.jpg" class="w-full h-full object-cover" alt="">
+            <div class="absolute inset-0 gradient-overlay-3"></div>
+            <div class="absolute inset-0 flex items-center px-8 md:px-16">
+                <div class="max-w-2xl text-white">
+                    <p class="text-red-300 font-bold text-sm tracking-widest mb-3">НОВЫЕ БРЕНДЫ</p>
+                    <h1 class="text-5xl md:text-7xl font-black leading-none mb-6">JORDAN<br>SALOMON</h1>
+                    <p class="text-lg mb-8 opacity-90">Топовые модели уже в наличии.</p>
+                    <a href="catalog.html" class="inline-block px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition">Открыть →</a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+            <button onclick="goSlide(0)" class="hero-dot w-3 h-3 rounded-full bg-white"></button>
+            <button onclick="goSlide(1)" class="hero-dot w-3 h-3 rounded-full bg-white/40"></button>
+            <button onclick="goSlide(2)" class="hero-dot w-3 h-3 rounded-full bg-white/40"></button>
+        </div>
+    </section>
+
+    <!-- Каталог (сразу) -->
+    <!-- Осенний баннер -->
+    <section class="autumn-banner text-white py-16 px-4 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="text-6xl mb-4">🍂</div>
+            <h2 class="text-4xl md:text-5xl font-black mb-3">ОСЕННЯЯ КОЛЛЕКЦИЯ 2026</h2>
+            <p class="text-lg opacity-90 mb-6">Тёплые модели для прохладной погоды · Скидки до 50%</p>
+            <a href="catalog.html?season=autumn" class="inline-block px-8 py-4 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition">Смотреть коллекцию →</a>
+        </div>
+    </section>
+
+    <!-- Каталог (сразу) -->
+    <section class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-4xl font-black">КАТАЛОГ</h2>
+                <p class="text-gray-500 mt-3">120 моделей · фильтры, сортировка, поиск</p>
+            </div>
+            <a href="catalog.html" class="text-amber-500 font-semibold hover:text-amber-600 transition text-sm">Весь каталог →</a>
+        </div>
+        <div id="catalogGrid" class="grid grid-cols-2 md:grid-cols-4 gap-8"></div>
+    </section>
+
+    <!-- 6 брендов -->
+    <section class="py-24 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-black mb-3">ПОПУЛЯРНЫЕ БРЕНДЫ</h2>
+            <p class="text-gray-500 mb-12">Кликни — откроется каталог с фильтром</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <a href="catalog.html?brand=Nike" class="brand-btn bg-white p-6 rounded-2xl border-2 border-gray-200 text-center block">
+                    <div class="text-3xl font-black">Nike</div>
+                    <div class="text-xs text-gray-500 mt-2">45 моделей</div>
+                </a>
+                <a href="catalog.html?brand=Adidas" class="brand-btn bg-white p-6 rounded-2xl border-2 border-gray-200 text-center block">
+                    <div class="text-3xl font-black">Adidas</div>
+                    <div class="text-xs text-gray-500 mt-2">38 моделей</div>
+                </a>
+                <a href="catalog.html?brand=New Balance" class="brand-btn bg-white p-6 rounded-2xl border-2 border-gray-200 text-center block">
+                    <div class="text-3xl font-black">New Balance</div>
+                    <div class="text-xs text-gray-500 mt-2">22 модели</div>
+                </a>
+                <a href="catalog.html?brand=Puma" class="brand-btn bg-white p-6 rounded-2xl border-2 border-gray-200 text-center block">
+                    <div class="text-3xl font-black">Puma</div>
+                    <div class="text-xs text-gray-500 mt-2">18 моделей</div>
+                </a>
+                <a href="catalog.html?brand=Vans" class="brand-btn bg-white p-6 rounded-2xl border-2 border-gray-200 text-center block">
+                    <div class="text-3xl font-black">Vans</div>
+                    <div class="text-xs text-gray-500 mt-2">12 моделей</div>
+                </a>
+                <a href="catalog.html?brand=Jordan" class="brand-btn bg-white p-6 rounded-2xl border-2 border-gray-200 text-center block">
+                    <div class="text-3xl font-black">Jordan</div>
+                    <div class="text-xs text-gray-500 mt-2">8 моделей</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 стикера -->
+    <section class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="sticker bg-white p-8 rounded-3xl border border-gray-200">
+                <div class="text-4xl mb-4">🚚</div>
+                <h3 class="text-xl font-black mb-3">Доставка на следующий день</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">В Москве и 60 других крупных городах России вы получите свой заказ уже на следующий день! Более подробную информацию об условиях доставки в ваш город можно найти здесь.</p>
+            </div>
+            <div class="sticker bg-white p-8 rounded-3xl border border-gray-200">
+                <div class="text-4xl mb-4">👟</div>
+                <h3 class="text-xl font-black mb-3">Примерка перед покупкой</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Наш магазин даёт возможность примерить обувь перед оплатой заказа курьеру. Оплачивайте только то, что вам подошло и понравилось!</p>
+            </div>
+            <div class="sticker bg-white p-8 rounded-3xl border border-gray-200">
+                <div class="text-4xl mb-4">💳</div>
+                <h3 class="text-xl font-black mb-3">Удобные способы оплаты</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">Вы можете оплатить покупки не только наличными, но и банковской картой. У всех курьеров при себе есть терминал для оплаты картами.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подписка -->
+    <section class="py-24 px-4 bg-gray-50">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-black mb-4">ПОДПИШИСЬ НА СКИДКИ</h2>
+            <p class="text-gray-600 mb-8">Первым узнавай о новинках и распродажах</p>
+            <form id="subscribeForm" class="flex gap-2 max-w-md mx-auto">
+                <input type="email" placeholder="Email" required class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:border-amber-500 outline-none">
+                <button type="submit" class="px-6 py-3 bg-gray-900 text-white font-bold rounded-full hover:bg-amber-500 transition">OK</button>
+            </form>
+            <p id="subMsg" class="text-green-600 font-bold mt-4 hidden">✅ Спасибо! Жди письма.</p>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-900 text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+            <div>
+                <div class="text-2xl font-black mb-4">SOLE<span class="text-amber-500">HOUSE</span></div>
+                <p class="text-gray-400 text-sm">Оригинальные кроссовки с доставкой по России</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Магазин</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="catalog.html?cat=men" class="hover:text-amber-500">Мужские</a></li>
+                    <li><a href="catalog.html?cat=women" class="hover:text-amber-500">Женские</a></li>
+                    <li><a href="catalog.html?cat=kids" class="hover:text-amber-500">Дети</a></li>
+                    <li><a href="catalog.html?sale=1" class="hover:text-amber-500">Sale</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Помощь</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-amber-500">Доставка</a></li>
+                    <li><a href="#" class="hover:text-amber-500">Возврат</a></li>
+                    <li><a href="#" class="hover:text-amber-500">Размеры</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Контакты</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li>+7 (999) 123-45-67</li>
+                    <li>info@solehouse.ru</li>
+                    <li>Москва, ул. Арбат, 10</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <p>© 2026 SOLEHOUSE</p>
+            <a href="/portfolio/shop/index.html" class="hover:text-amber-500">← К выбору режима</a>
+        </div>
+    </footer>
+
+    <!-- Чат поддержки -->
+    <div id="chatWidget">
+        <div id="chatPanel">
+            <div class="bg-gray-900 text-white p-4 flex justify-between items-center">
+                <div>
+                    <div class="font-bold">Поддержка SOLEHOUSE</div>
+                    <div class="text-xs text-green-400">● Онлайн · отвечаем за 2 мин</div>
+                </div>
+                <button onclick="toggleChat()" class="text-white/70 hover:text-white text-xl">✕</button>
+            </div>
+            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50">
+                <div class="bg-white p-3 rounded-2xl rounded-tl-sm text-sm max-w-[80%]">
+                    Привет! Чем можем помочь? Можешь спросить про размер, доставку или оплату.
+                </div>
+            </div>
+            <div class="p-3 border-t flex gap-2">
+                <input type="text" id="chatInput" placeholder="Ваш вопрос..."
+                       class="flex-1 px-3 py-2 border rounded-full text-sm outline-none focus:border-amber-500">
+                <button onclick="sendChat()" class="w-10 h-10 bg-gray-900 text-white rounded-full hover:bg-amber-500 transition">→</button>
+            </div>
+        </div>
+        <button onclick="toggleChat()" class="w-16 h-16 bg-gray-900 text-white rounded-full shadow-2xl hover:bg-amber-500 transition flex items-center justify-center text-2xl relative">
+            💬
+            <span class="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>
+        </button>
+    </div>
+
+    <script src="/portfolio/shop/fallback/js/auth.js"></script>
+    <script src="/portfolio/shop/fallback/js/shop.js"></script>
+    <script>
+        // Слайдер
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.hero-dot');
+        function goSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => { d.classList.remove('bg-white'); d.classList.add('bg-white/40'); });
+            slides[n].classList.add('active');
+            dots[n].classList.remove('bg-white/40');
+            dots[n].classList.add('bg-white');
+            currentSlide = n;
+        }
+        setInterval(() => { currentSlide = (currentSlide + 1) % slides.length; goSlide(currentSlide); }, 5000);
+
+        // Загрузка
+        (async () => {
+            await loadProducts();
+            const catalog = PRODUCTS.slice(0, 8);
+            document.getElementById('catalogGrid').innerHTML = catalog.map(productCard).join('');
+        })();
+
+        // Поиск
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                window.location.href = 'catalog.html?search=' + encodeURIComponent(e.target.value);
+            }
+        });
+
+        // Подписка
+        document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('subMsg').classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => document.getElementById('subMsg').classList.add('hidden'), 3000);
+        });
+
+        // Чат
+        function toggleChat() {
+            document.getElementById('chatPanel').classList.toggle('open');
+        }
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += `<div class="bg-gray-900 text-white p-3 rounded-2xl rounded-tr-sm text-sm max-w-[80%] ml-auto">${text}</div>`;
+            input.value = '';
+            setTimeout(() => {
+                messages.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-tl-sm text-sm max-w-[80%]">Запрос отправлен в поддержку. Ответим в течение 2 минут.</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 800);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        function createLeaves() {
+            const leaves = ['🍂', '🍁', '🍃'];
+            for (let i = 0; i < 15; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDuration = (8 + Math.random() * 6) + 's';
+                leaf.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(leaf);
+            }
+        }
+        createLeaves();
+    </script>
+
+</body>
+</html>

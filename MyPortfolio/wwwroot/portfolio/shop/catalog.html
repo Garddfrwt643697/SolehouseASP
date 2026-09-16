@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — SOLEHOUSE</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+            }
+
+        .product-placeholder {
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .badge-sale {
+            background: #ef4444;
+            color: white;
+        }
+
+        .badge-new {
+            background: #10b981;
+            color: white;
+        }
+
+        .link-underline {
+            position: relative;
+        }
+
+            .link-underline::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: currentColor;
+                transition: width 0.3s;
+            }
+
+            .link-underline:hover::after {
+                width: 100%;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gray-900 text-white text-xs text-center py-2">
+        Бесплатная доставка от 5 000 ₽ · Возврат 30 дней · Оригинал 100%
+    </div>
+
+    <header class="border-b border-gray-200 sticky top-0 bg-white z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center gap-4">
+            <a href="/portfolio/shop/index.html" class="text-2xl font-black tracking-tight">SOLE<span class="text-amber-500">HOUSE</span></a>
+            <nav class="hidden md:flex gap-6 text-sm font-semibold text-gray-700">
+                <a href="?cat=men" class="link-underline hover:text-amber-500 transition">Мужские</a>
+                <a href="?cat=women" class="link-underline hover:text-amber-500 transition">Женские</a>
+                <a href="?cat=kids" class="link-underline hover:text-amber-500 transition">Дети</a>
+                <a href="?cat=sale" class="link-underline hover:text-red-500 transition text-red-500">Sale</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="/portfolio/shop/favorites.html" class="text-sm font-semibold text-gray-700 hover:text-amber-500 transition relative">
+                    ♡ Избранное
+                    <span id="favCount" class="absolute -top-2 -right-3 bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+                <a href="/portfolio/shop/cart.html" class="text-sm font-semibold text-gray-700 hover:text-amber-500 transition relative">
+                    🛒 Корзина
+                    <span id="cartCount" class="absolute -top-2 -right-3 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-gray-500">
+        <a href="/portfolio/shop/index.html" class="hover:text-amber-500 transition">Главная</a>
+        <span class="mx-2">/</span>
+        <span id="breadcrumb">Каталог</span>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 pb-20 grid md:grid-cols-4 gap-8">
+
+        <aside class="md:col-span-1">
+            <h3 class="font-black text-lg mb-4">ФИЛЬТРЫ</h3>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Категория</h4>
+                <div class="space-y-2 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="all" checked> Все</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="men"> Мужские</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="women"> Женские</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="kids"> Дети</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="cat" value="sale"> Sale</label>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Бренд</h4>
+                <div class="space-y-2 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="brand-filter" value="Nike"> Nike</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="brand-filter" value="Adidas"> Adidas</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="brand-filter" value="New Balance"> New Balance</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" class="brand-filter" value="Puma"> Puma</label>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="font-bold text-sm mb-3">Цена</h4>
+                <div class="flex gap-2">
+                    <input type="number" id="priceMin" placeholder="от" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <input type="number" id="priceMax" placeholder="до" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                </div>
+                <button onclick="applyPrice()" class="mt-2 w-full py-2 bg-gray-900 text-white font-bold rounded-lg text-sm hover:bg-gray-800 transition">Применить</button>
+            </div>
+
+            <button onclick="resetFilters()" class="w-full py-2 border border-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-50 transition">Сбросить всё</button>
+        </aside>
+
+        <main class="md:col-span-3">
+            <div class="flex justify-between items-center mb-6">
+                <p class="text-sm text-gray-500"><span id="count">0</span> товаров</p>
+                <select id="sort" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-semibold outline-none">
+                    <option value="default">Сортировка: по умолчанию</option>
+                    <option value="price-asc">Цена: по возрастанию</option>
+                    <option value="price-desc">Цена: по убыванию</option>
+                    <option value="name">По названию</option>
+                </select>
+            </div>
+
+            <div id="grid" class="grid grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <p id="empty" class="text-center text-gray-500 py-20 hidden">Ничего не найдено</p>
+        </main>
+
+    </div>
+
+    <script src="/portfolio/shop/js/shop.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialCat = urlParams.get('cat') || 'all';
+
+        let currentCat = initialCat;
+        let currentBrands = [];
+        let currentPriceMin = 0;
+        let currentPriceMax = Infinity;
+        let currentSort = 'default';
+
+        if (initialCat !== 'all') {
+            document.querySelector(`input[name="cat"][value="${initialCat}"]`).checked = true;
+            document.getElementById('breadcrumb').textContent =
+                initialCat === 'men' ? 'Мужские' :
+                initialCat === 'women' ? 'Женские' :
+                initialCat === 'kids' ? 'Дети' : 'Sale';
+        }
+
+        function filterProducts() {
+            let list = [...PRODUCTS];
+            if (currentCat === 'sale') list = list.filter(p => p.oldPrice);
+            else if (currentCat !== 'all') list = list.filter(p => p.cat === currentCat);
+            if (currentBrands.length) list = list.filter(p => currentBrands.includes(p.brand));
+            list = list.filter(p => p.price >= currentPriceMin && p.price <= currentPriceMax);
+
+            if (currentSort === 'price-asc') list.sort((a,b) => a.price - b.price);
+            else if (currentSort === 'price-desc') list.sort((a,b) => b.price - a.price);
+            else if (currentSort === 'name') list.sort((a,b) => a.name.localeCompare(b.name));
+
+            return list;
+        }
+
+        function render() {
+            const list = filterProducts();
+            document.getElementById('count').textContent = list.length;
+            if (list.length === 0) {
+                document.getElementById('grid').innerHTML = '';
+                document.getElementById('empty').classList.remove('hidden');
+            } else {
+                document.getElementById('empty').classList.add('hidden');
+                document.getElementById('grid').innerHTML = list.map(productCard).join('');
+            }
+        }
+
+        document.querySelectorAll('input[name="cat"]').forEach(r => {
+            r.addEventListener('change', () => { currentCat = r.value; render(); });
+        });
+        document.querySelectorAll('.brand-filter').forEach(c => {
+            c.addEventListener('change', () => {
+                currentBrands = Array.from(document.querySelectorAll('.brand-filter:checked')).map(x => x.value);
+                render();
+            });
+        });
+        document.getElementById('sort').addEventListener('change', (e) => {
+            currentSort = e.target.value; render();
+        });
+
+        function applyPrice() {
+            currentPriceMin = parseInt(document.getElementById('priceMin').value) || 0;
+            currentPriceMax = parseInt(document.getElementById('priceMax').value) || Infinity;
+            render();
+        }
+        function resetFilters() {
+            currentCat = 'all'; currentBrands = []; currentPriceMin = 0; currentPriceMax = Infinity; currentSort = 'default';
+            document.querySelector('input[name="cat"][value="all"]').checked = true;
+            document.querySelectorAll('.brand-filter').forEach(c => c.checked = false);
+            document.getElementById('priceMin').value = '';
+            document.getElementById('priceMax').value = '';
+            document.getElementById('sort').value = 'default';
+            render();
+        }
+
+        render();
+    </script>
+
+</body>
+</html>

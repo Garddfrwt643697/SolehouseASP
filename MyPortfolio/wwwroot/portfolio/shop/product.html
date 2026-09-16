@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар — SOLEHOUSE</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+        }
+
+        .product-placeholder {
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #9ca3af;
+        }
+
+        .size-btn {
+            transition: all 0.2s;
+        }
+
+            .size-btn:hover, .size-btn.active {
+                background: #111;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gray-900 text-white text-xs text-center py-2">Бесплатная доставка от 5 000 ₽ · Возврат 30 дней</div>
+
+    <header class="border-b border-gray-200 bg-white">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/portfolio/shop/index.html" class="text-2xl font-black">SOLE<span class="text-amber-500">HOUSE</span></a>
+            <div class="flex gap-4 text-sm font-semibold">
+                <a href="/portfolio/shop/favorites.html" class="hover:text-amber-500 relative">♡ <span id="favCount" class="bg-amber-500 text-white text-xs rounded-full px-1.5">0</span></a>
+                <a href="/portfolio/shop/cart.html" class="hover:text-amber-500 relative">🛒 <span id="cartCount" class="bg-gray-900 text-white text-xs rounded-full px-1.5">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-gray-500">
+        <a href="/portfolio/shop/index.html" class="hover:text-amber-500">Главная</a> /
+        <a href="/portfolio/shop/catalog.html" class="hover:text-amber-500">Каталог</a> /
+        <span id="bcName">Товар</span>
+    </div>
+
+    <main id="productPage" class="max-w-7xl mx-auto px-4 pb-20 grid md:grid-cols-2 gap-12"></main>
+
+    <script src="/portfolio/shop/js/shop.js"></script>
+    <script>
+        const id = parseInt(new URLSearchParams(window.location.search).get('id'));
+        const p = PRODUCTS.find(x => x.id === id);
+
+        if (!p) {
+            document.getElementById('productPage').innerHTML = '<p class="text-2xl font-bold col-span-2 text-center py-20">Товар не найден</p>';
+        } else {
+            document.getElementById('bcName').textContent = p.name;
+            const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+            const sizes = ['39','40','41','42','43','44','45'];
+
+            document.getElementById('productPage').innerHTML = `
+                <div>
+                    <div class="aspect-square rounded-3xl product-placeholder text-2xl ${p.color}">${p.brand.toUpperCase()}</div>
+                    <div class="grid grid-cols-4 gap-3 mt-4">
+                        ${[1,2,3,4].map(i => `<div class="aspect-square rounded-xl product-placeholder text-xs ${p.color}">ФОТО ${i}</div>`).join('')}
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-semibold">${p.brand}</p>
+                    <h1 class="text-3xl md:text-4xl font-black mt-2">${p.name}</h1>
+                    <div class="flex items-center gap-3 mt-4">
+                        <span class="text-3xl font-black">${p.price.toLocaleString('ru-RU')} ₽</span>
+                        ${p.oldPrice ? `<span class="text-xl text-gray-400 line-through">${p.oldPrice.toLocaleString('ru-RU')} ₽</span>` : ''}
+                        ${p.oldPrice ? `<span class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">-${discount}%</span>` : ''}
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="font-bold mb-3">Размер</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${sizes.map((s, i) => `<button onclick="selectSize(this)" class="size-btn px-4 py-3 border border-gray-300 rounded-lg font-bold text-sm ${i===3 ? 'active' : ''}">${s}</button>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex gap-3">
+                        <button onclick="addToCart(${p.id})" class="flex-1 py-4 bg-gray-900 text-white font-black rounded-xl hover:bg-gray-800 transition">В КОРЗИНУ</button>
+                        <button onclick="toggleFavorite(${p.id})" class="px-6 py-4 border-2 border-gray-300 rounded-xl text-2xl hover:border-red-500 transition">♡</button>
+                    </div>
+
+                    <div class="mt-8 space-y-3 text-sm text-gray-600">
+                        <p>✓ Оригинал 100% · Гарантия</p>
+                        <p>✓ Доставка 2 дня по России</p>
+                        <p>✓ Возврат 30 дней</p>
+                    </div>
+
+                    <div class="mt-8 border-t pt-6">
+                        <h3 class="font-bold mb-3">Описание</h3>
+                        <p class="text-gray-600 text-sm">Классическая модель ${p.brand} ${p.name} — комфорт на каждый день. Амортизация, дышащий верх, износостойкая подошва.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

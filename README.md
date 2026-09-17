@@ -1,13 +1,13 @@
-# SOLEHOUSE — ASP.NET Core Portfolio
+# SOLEHOUSE - ASP.NET Core Portfolio
 
 Магазин кроссовок + портфолио на ASP.NET Core.
 
 ---
 
-## 🚀 Быстрый старт
+##  Быстрый старт
 
 ### Что нужно
-- **.NET 10 SDK** — [скачать](https://dotnet.microsoft.com/download/dotnet/10.0)
+- .NET 10 SDK - [скачать](https://dotnet.microsoft.com/download/dotnet/10.0)
 - Проверка: `dotnet --version` в терминале → должно быть `10.x.x`
 
 ### Запуск
@@ -18,7 +18,7 @@ dotnet run
 markdown
 
 Если без Git
-Нажми Code → Download ZIP на странице репозитория
+Нажми Code => Download ZIP на странице репозитория
 
 Распакуй архив
 

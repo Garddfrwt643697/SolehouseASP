@@ -23,7 +23,7 @@ markdown
 Распакуй архив
 
 Открой папку MyPortfolio в терминале
-
-Введи dotnet run  или нажми F5
+Введи cd MyPortfolio
+Введи dotnet run  
 
 Открой http://localhost:5240
